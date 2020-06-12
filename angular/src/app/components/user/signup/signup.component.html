@@ -1,32 +1,80 @@
 <div classs="container" style="margin-top: 60px;">
     <div class="card">
         <div class="card-header">
-            Signup
+            สมัครสมาชิก
         </div>
-        <div class="card-body" style="margin-left: 10px;">
-            <div class="row">
-                <div class="col-md-7">
+        <div class="card-body" style="margin: 0px 20px 0px 20px;">
+            <!-- <div class="row"> -->
+                <!-- <div class="col-md-7"> -->
 
                     <form [formGroup]="profileForm">
 
-                        <div class="form-group">
-                            <label for="">Title</label>
-                            <select class="form-control" formControlName="title">
-                                <option value=""></option>
-                                <option value="Mr">Mr</option>
-                                <option value="Mrs">Mrs</option>
-                                <option value="Miss">Miss</option>
-                                <option value="Ms">Ms</option>
-                            </select>
+                        <div class="form-row align-items-center">
+                            <div class="form-group col-sm-2">
+                                <label>Username</label>
+                            </div>
+                            <div class="form-group col-sm">
+                                <input type="text" class="form-control" formControlName='username'>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>First Name</label>
-                            <input type="text" class="form-control" formControlName='firstName'>
+
+                        <div class="form-row align-items-center">
+                            <div class="form-group col-sm-2">
+                                <label>Password</label>
+                            </div>
+                            <div class="form-group col-sm">
+                                <input type="password" class="form-control" formControlName='password'>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Last Name</label>
-                            <input type="text" class="form-control" formControlName='lastName'>
+
+                        <div class="form-row align-items-center">
+                            <div class="form-group col-sm-2">
+                                <label>Email</label>
+                            </div>
+                            <div class="form-group col-sm">
+                                <input type="email" class="form-control" formControlName='email'>
+                            </div>
+                            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+                                <div *ngIf="email.errors.required">
+                                    กรุณากรอก Email
+                                </div>
+                                <div *ngIf="email.errors.email">
+                                    Email ไม่ถูกต้อง
+                                </div>
+                            </div>
                         </div>
+                        <hr />
+
+                        <h4>ข้อมูลส่วนตัว</h4>
+
+                        <div class="form-row align-items-center">
+                            <div class="form-group col-sm-2">
+                                <label for="">ชื่อ-นามสกุล</label>
+                            </div>
+                            <div class="form-group col-sm-1">
+                                <select class="form-control" formControlName="title">
+                                    <option value="" disabled></option>
+                                    <option value="นาย">นาย</option>
+                                    <option value="นาง">นาง</option>
+                                    <option value="นางสาว">นางสาว</option>
+                                    <option value="อื่น ๆ">อื่น ๆ</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm">
+                                <input type="text" class="form-control" formControlName='firstName'>
+                            </div>
+                            <div class="form-group col-sm">
+                                <input type="text" class="form-control" formControlName='lastName'>
+                            </div>
+                        </div>
+
+                        <!-- <div class="form-row">
+                            <div class="form-group col-sm-3">
+                                <label>คำนำหน้า</label>
+                                
+                            </div>
+                            
+                        </div> -->
 
                         <!-- <div class="form-group">
                             <label>Student ID</label>
@@ -41,33 +89,103 @@
                             </div>
                         </div> -->
 
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="sex" value="Male"
-                                    formControlName='sex'> Male
-                            </label>
+                        <div class="form-row">
+                            <div class="form-group col-sm-2">
+                                เพศ
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="sex" value="ชาย"
+                                        formControlName='sex'>
+                                    ชาย
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="sex" value="หญิง"
+                                        formControlName='sex'>
+                                    หญิง
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="sex" value="อื่น ๆ"
+                                        formControlName='sex'> อื่น ๆ
+                                </label>
+                            </div>
                         </div>
 
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="sex" value="Female"
-                                    formControlName='sex'> Female
-                            </label>
-                        </div>
-                        <br /><br />
+                        <div formGroupName="birthday">
+                            <div class="form-group">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-3">
+                                        <label for="">วัน/เดือน/ปีเกิด</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <select class="form-control" formControlName="date" aria-placeholder="วันที่">
+                                            <option value="" disabled>วันที่</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                            <option value="31">31</option>
+                                        </select>
+                                    </div>
 
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" class="form-control" formControlName='email'>
-                            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
-                                <div *ngIf="email.errors.required">
-                                    Email is required.
-                                </div>
-                                <div *ngIf="email.errors.email">
-                                    Your email is incorrect!!
+                                    <div class="col-sm-3">
+                                        <select class="form-control" formControlName="month">
+                                            <option value="" disabled>เดือน</option>
+                                            <option value="มกราคม">มกราคม</option>
+                                            <option value="กุมภาพันธ์">กุมภาพันธ์</option>
+                                            <option value="มีนาคม">มีนาคม</option>
+                                            <option value="เมษายน">เมษายน</option>
+                                            <option value="พฤษภาคม">พฤษภาคม</option>
+                                            <option value="มิถุนายน">มิถุนายน</option>
+                                            <option value="กรกฎาคม">กรกฎาคม</option>
+                                            <option value="สิงหาคม">สิงหาคม</option>
+                                            <option value="กันยายน">กันยายน</option>
+                                            <option value="ตุลาคม">ตุลาคม</option>
+                                            <option value="พฤศจิกายน">พฤศจิกายน</option>
+                                            <option value="ธันวาคม">ธันวาคม</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <input type="text" class="form-control" formControlName='year'
+                                            placeholder="ปีพ.ศ.">
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
+
+                        <hr />
 
                         <div formGroupName="address">
                             <h4>Address</h4>
@@ -104,9 +222,9 @@
                         <button type="reset" class="btn btn-primary">Reset</button>
                     </form>
 
-                </div>
+                <!-- </div> -->
 
-                <div class="col-md-5">
+                <!-- <div class="col-md-5">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Display :</h4>
@@ -118,8 +236,9 @@
                             </p>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div> -->
+
+            <!-- </div> -->
         </div>
     </div>
 </div>
