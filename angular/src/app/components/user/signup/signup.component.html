@@ -23,9 +23,22 @@
                                 <label>Password</label>
                             </div>
                             <div class="form-group col-sm">
-                                <input type="password" class="form-control" formControlName='password'>
+                                <input type="password" name="password" class="form-control" formControlName='password'>
                             </div>
                         </div>
+
+                        <!-- <div class="form-row align-items-center">
+                            <div class="form-group col-sm-2">
+                                <label>Confirm Password</label>
+                            </div>
+                            <div class="form-group col-sm">
+                                <input type="password" name="confirmpassword" pattern={{password.value}} class="form-control" formControlName='confirmpassword'>
+                            </div>
+                            
+                            <div *ngIf="email.errors.pattern" class="alert alert-danger">
+                                    Password doesn't match!
+                            </div>
+                        </div> -->
 
                         <div class="form-row align-items-center">
                             <div class="form-group col-sm-2">
@@ -47,13 +60,44 @@
 
                         <h4>ข้อมูลส่วนตัว</h4>
 
+                        
+
                         <div class="form-row align-items-center">
+                            <div class="form-group col-sm-2">
+                                <label>Full name</label>
+                            </div>
+                            <div class="form-group col-sm">
+                                <input type="text" class="form-control" formControlName='fullname'>
+                            </div>
+                        </div>
+
+                        <div class="form-row align-items-center">
+                            <div class="form-group col-sm-2">
+                                <label>Age</label>
+                            </div>
+                            <div class="form-group col-sm">
+                                <input type="number" class="form-control" formControlName='age'>
+                            </div>
+                        </div>
+
+                        <div class="form-row align-items-center">
+                            <div class="form-group col-sm-2">
+                                <label>Profile picture</label>
+                            </div>
+                            <div class="form-group col-sm">
+                                <input type="file" class="form-control" formControlName='avatar'>
+                            </div>
+                        </div>
+
+                        <!-- <div class="form-row align-items-center">
                             <div class="form-group col-sm-2">
                                 <label for="">ชื่อ-นามสกุล</label>
                             </div>
                             <div class="form-group col-sm-1">
                                 <select class="form-control" formControlName="title">
-                                    <option value="" disabled></option>
+                                    <option value="" disabled>
+                                        
+                                    </option>
                                     <option value="นาย">นาย</option>
                                     <option value="นาง">นาง</option>
                                     <option value="นางสาว">นางสาว</option>
@@ -66,30 +110,9 @@
                             <div class="form-group col-sm">
                                 <input type="text" class="form-control" formControlName='lastName'>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- <div class="form-row">
-                            <div class="form-group col-sm-3">
-                                <label>คำนำหน้า</label>
-                                
-                            </div>
-                            
-                        </div> -->
-
-                        <!-- <div class="form-group">
-                            <label>Student ID</label>
-                            <input type="stdid" class="form-control" formControlName='stdid' placeholder="BXXXXXXX">
-                            <div *ngIf="stdid.invalid && (stdid.dirty || stdid.touched)" class="alert alert-danger">
-                                <div *ngIf="stdid.errors.required">
-                                    Student ID is required.
-                                </div>
-                                <div *ngIf="stdid.errors.pattern">
-                                    Your student ID pattern is incorrect!!
-                                </div>
-                            </div>
-                        </div> -->
-
-                        <div class="form-row">
                             <div class="form-group col-sm-2">
                                 เพศ
                             </div>
@@ -215,10 +238,10 @@
                                 <label>Alias: {{i}}</label>
                                 <input type="text" class="form-control" [formControlName]="i">
                             </div>
-                        </div>
+                        </div> -->
 
                         <br /><br />
-                        <button type="submit" class="btn btn-primary">Submit</button>&nbsp;
+                        <button type="button" (click)="signup()" class="btn btn-primary">Submit</button>&nbsp;
                         <button type="reset" class="btn btn-primary">Reset</button>
                     </form>
 
