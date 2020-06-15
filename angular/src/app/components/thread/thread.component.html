@@ -1,0 +1,41 @@
+<div >
+    <form [formGroup]="threadForm">
+        
+            <div class="col-md-3">
+                ชื่อกระทู้
+            </div>
+            <div class="col-md-7">
+                <div class="form-group">
+                  <input  class="form-control" formControlName='title'>
+                </div>
+            </div>
+      
+            
+            <div class="col-md-2">
+                ข้อความ
+            </div>
+            <div class="col-md-9">
+                <div class="form-group">
+                    <textarea  class="form-control" rows="8" id="comment" formControlName="textArea" ></textarea>
+                </div>
+            </div>
+            <div class="col-md-2">
+                เลือกหมวดหมู่
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <select class="form-control" formControlName="filter">
+                      <option value=""></option>
+                      <option *ngFor="let item of threadType" [value]="item">{{item}}</option>
+                    </select>
+                  </div>
+            </div>
+    
+ 
+   </form>
+   <div class="col-md-5">
+    
+    <button type="button" class="btn btn-primary" (click)="addThread()">โพสต์</button>
+   </div>
+    
+  </div>

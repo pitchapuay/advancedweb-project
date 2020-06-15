@@ -1,0 +1,127 @@
+<div classs="container" style="margin-top: 60px;">
+    <div class="card">
+        <div class="card-header">
+            สมัครสมาชิก
+        </div>
+        <div class="card-body" style="margin: 0px 20px 0px 20px;">
+            <!-- <div class="row"> -->
+            <!-- <div class="col-md-7"> -->
+
+            <form [formGroup]="profileForm">
+
+                <div class="form-row align-items-center">
+                    <div class="form-group col-sm-2">
+                        <label>Username</label>
+                    </div>
+                    <div class="form-group col-sm">
+                        <input type="text" class="form-control" formControlName='username'>
+                    </div>
+                </div>
+
+                <div class="form-row align-items-center">
+                    <div class="form-group col-sm-2">
+                        <label>Password</label>
+                    </div>
+                    <div class="form-group col-sm">
+                        <input type="password" name="password" class="form-control" formControlName='password'>
+                    </div>
+                </div>
+
+                <!-- <div class="form-row align-items-center">
+                            <div class="form-group col-sm-2">
+                                <label>Confirm Password</label>
+                            </div>
+                            <div class="form-group col-sm">
+                                <input type="password" name="confirmpassword" pattern={{password.value}} class="form-control" formControlName='confirmpassword'>
+                            </div>
+                            
+                            <div *ngIf="email.errors.pattern" class="alert alert-danger">
+                                    Password doesn't match!
+                            </div>
+                        </div> -->
+
+                <div class="form-row align-items-center">
+                    <div class="form-group col-sm-2">
+                        <label>Email</label>
+                    </div>
+                    <div class="form-group col-sm">
+                        <input type="email" class="form-control" formControlName='email'>
+                    </div>
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+                        <div *ngIf="email.errors.required">
+                            กรุณากรอก Email
+                        </div>
+                        <div *ngIf="email.errors.email">
+                            Email ไม่ถูกต้อง
+                        </div>
+                    </div>
+                </div>
+                <hr />
+
+                <h4>ข้อมูลส่วนตัว</h4>
+
+                <div class="form-row align-items-center">
+                    <div class="form-group col-sm-2">
+                        <label>Full name</label>
+                    </div>
+                    <div class="form-group col-sm">
+                        <input type="text" class="form-control" formControlName='fullname'>
+                    </div>
+                </div>
+
+                <div class="form-row align-items-center">
+                    <div class="form-group col-sm-2">
+                        <label>Age</label>
+                    </div>
+                    <div class="form-group col-sm">
+                        <input type="number" class="form-control" formControlName='age'>
+                    </div>
+                </div>
+
+                <div class="form-row align-items-center">
+                    <div class="form-group col-sm-2">
+                        <label>Profile picture</label>
+                    </div>
+                    <div class="form-group col-sm">
+                        <input type="file" class="form-control-file" formControlName='file'
+                            (change)="onChangeImg($event)">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-9">
+                        <img *ngIf="previewLoaded" class="img-thumbnail" [src]="this.profileForm.value.avatar"
+                            style="height:150px;">
+                    </div>
+                </div>
+
+                
+
+                <br /><br />
+                <button type="button" (click)="signup()" class="btn btn-primary">Submit</button>&nbsp;
+                <button type="reset" class="btn btn-danger" (click)="resetForm()">Reset</button>
+            </form>
+
+            <!-- </div> -->
+
+            <!-- <div class="col-md-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Display :</h4>
+                            <p class="card-text">
+                                Form Value: {{profileForm.value|json}}
+                            </p>
+                            <p>
+                                Form Status : {{checkForm()}}
+                            </p>
+                        </div>
+                    </div>
+                </div> -->
+
+            <!-- </div> -->
+        </div>
+    </div>
+</div>

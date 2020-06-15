@@ -1,0 +1,30 @@
+{
+  "name": "advancedweb-project",
+  "version": "1.0.0",
+  "description": "น้องชิน กระบวย",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pitchapuay/advancedweb-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pitchapuay/advancedweb-project/issues"
+  },
+  "homepage": "https://github.com/pitchapuay/advancedweb-project#readme",
+  "dependencies": {
+    "angular-web-storage": "^9.0.0",
+    "bcryptjs": "^2.4.3",
+    "bootstrap": "^4.5.0",
+    "express": "^4.17.1",
+    "jquery": "^3.5.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.18",
+    "popper.js": "^1.16.1"
+  }
+}

@@ -1,0 +1,23 @@
+<table class="table table-borderless">
+    <thead class="thead-inverse">
+        <tr>
+
+
+            <th>ชื่อกระทู้</th>
+
+            <th>หมวดหมู่</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of threads  ">
+
+            <td>{{item.title}}</td>
+            <td>{{item.filter}}</td>
+
+
+            <button type="button" class="btn btn-success" (click)="readData(item._id)">อ่าน</button>
+        </tr>
+    </tbody>
+</table>
