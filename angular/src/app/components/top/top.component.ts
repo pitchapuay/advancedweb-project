@@ -25,7 +25,7 @@ export class TopComponent implements OnInit {
     try {
       this.th.getThread().subscribe(
         data =>{
-          this.threads = data.sort(sortBy('-time'));
+          this.threads = data.sort(sortBy('-like'));
           
         },
         err =>{

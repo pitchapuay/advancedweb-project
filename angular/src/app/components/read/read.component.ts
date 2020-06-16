@@ -81,13 +81,14 @@ export class ReadComponent implements OnInit {
     try {
       this.th.getReadThread(this.ids).subscribe(
         data => {
+          this.local.set('count', data[0]['like'])
           this.threads = data
           this.title = data[0]['title']
           this.text = data[0]['textArea']
           this.avatar = data[0]['profile']['avatar']
           this.name = data[0]['profile']['name']
+
           
-          this.local.set('count', data[0]['like'])
 
 
 
@@ -107,9 +108,31 @@ export class ReadComponent implements OnInit {
       this.lk.getReadLike(this.ids, this.local.get('id')).subscribe(
         data => {
           this.likes = data
+
+          if (data[0] == null) {
+            this.statusLike = true;
+          } else {
+            this.statusLike = false;
+
+          }
+
+        },
+        err => {
+          console.log(err)
+        }
+      )
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  onLikeCheckDelte() {
+    try {
+      this.lk.getReadLike(this.ids, this.local.get('id')).subscribe(
+        data => {
+          this.likes = data
           this.count = data[0]['_id']
-         // console.log(data[0]['_id'])
-         this.local.set('idLike', this.count)
+          this.local.set('idLike', this.count)
           if (data[0] == null) {
             this.statusLike = true;
           } else {
@@ -145,8 +168,8 @@ export class ReadComponent implements OnInit {
     this.lk.addLike(this.likeForms.value).subscribe(
       data => {
         console.log(data)
-        alert('like added successfully');
-        window.location.reload()
+        //  alert('like added successfully');
+        //window.location.reload()
         this.commentForms.reset();
       },
       err => {
@@ -169,7 +192,7 @@ export class ReadComponent implements OnInit {
     this.th.updateCount(this.ids, this.countDelteForms.value).subscribe(
       data => {
         console.log(data)
-        this.onLikeCheck();
+        // this.onLikeCheck();
 
       },
       err => {
@@ -182,7 +205,7 @@ export class ReadComponent implements OnInit {
     this.lk.deleteLike(event).subscribe(
       data => {
         console.log(data)
-        alert('delete added successfully');
+        //  alert('delete added successfully');
         this.onLoading();
       },
       err => {
@@ -191,18 +214,22 @@ export class ReadComponent implements OnInit {
   }
 
   like() {
-    this.onLoading();
+
     //alert( this.threads[0]['like']);
-    if (this.statusLike == true) {
+    
+      this.onLoading();
+      this.onLikeCheck();
       this.addLike();
       this.updateCount();
-    } else {
+ }
+  unlike(){
+    this.onLoading();
+      this.onLikeCheckDelte();
+
+
       this.deleteLike(this.local.get('idLike'))
       this.updateCountDelte();
       this.statusLike = true;
-    }
-
-
-
+      this.onLoading();
   }
 }

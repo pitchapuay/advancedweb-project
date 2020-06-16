@@ -93,6 +93,7 @@ router.route('/like')
       const { id } = req.params
   
       await Like.findByIdAndDelete(id)
+      
       res.status(204).end()
   })
 
