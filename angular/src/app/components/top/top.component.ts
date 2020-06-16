@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ThreadService } from 'src/app/serveices/thread.service';
-import { sortBy } from 'sort-by-typescript';
-import {Router} from '@angular/router'
+import { Router } from '@angular/router';
 import { LocalStorageService } from 'angular-web-storage';
+import { sortBy } from 'sort-by-typescript';
 
 @Component({
-  selector: 'app-top-thread',
-  templateUrl: './top-thread.component.html',
-  styleUrls: ['./top-thread.component.css']
+  selector: 'app-top',
+  templateUrl: './top.component.html',
+  styleUrls: ['./top.component.css']
 })
-export class TopThreadComponent implements OnInit {
+export class TopComponent implements OnInit {
+
   threads: any
   cus = [];
 

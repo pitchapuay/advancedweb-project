@@ -11,12 +11,18 @@ import { ThreadService } from 'src/app/serveices/thread.service';
 export class ThreadComponent implements OnInit {
   threadType: string[] = ['เทคโนโลยี', 'ความรัก', 'ลี้ลับ', 'การเรียน','การงาน','ปัญหาชีวิต'];
   threadForm = new FormGroup({
+    like: new FormControl(0, ),
     title: new FormControl('', ),
     textArea: new FormControl('', ),
     idThread: new FormControl('',),
     filter: new FormControl('',),
     idUser: new FormControl(this.local.get('id'),),
-
+    profile: new FormGroup({
+      name: new FormControl(this.local.get('name'),),
+      age: new FormControl(this.local.get('age'),),
+      avatar: new FormControl(this.local.get('avatar'),),
+      
+    }),
     
   });
   constructor(private local:LocalStorageService,private th:ThreadService) { }
@@ -28,6 +34,7 @@ export class ThreadComponent implements OnInit {
       data => {
         console.log(data)
         alert('Thread added successfully');
+        window.location.reload()
         this.threadForm.reset();
       },
       err => {

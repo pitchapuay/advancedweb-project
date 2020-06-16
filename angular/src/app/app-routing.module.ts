@@ -5,6 +5,7 @@ import { SigninComponent } from './components/user/signin/signin.component';
 import { HomeComponent } from './components/home/home.component';
 import { PanlumComponent } from './components/panlum/panlum.component';
 import { ReadComponent } from './components/read/read.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'home', component: HomeComponent },
   { path: 'panlum', component: PanlumComponent },
+  { path: 'profile/:id', component: ProfileComponent },
   { path: 'read/:id', component: ReadComponent },
   {
     path: '',

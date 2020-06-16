@@ -10,10 +10,16 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AngularWebStorageModule } from 'angular-web-storage'
 import { HttpClientModule } from '@angular/common/http';
 import { ThreadComponent } from './components/thread/thread.component';
-import { PostThreadComponent } from './components/post-thread/post-thread.component'
+
 import {TypeComponent } from './components/type/type.component'
 import { TopThreadComponent } from './components/top-thread/top-thread.component';
 import { PanlumComponent } from './components/panlum/panlum.component';
+import { ReadComponent } from './components/read/read.component';
+import { CommentComponent } from './components/comment/comment.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { TopComponent } from './components/top/top.component';
+import { MypostComponent } from './components/mypost/mypost.component';
+
 
 @NgModule({
   declarations: [
@@ -22,10 +28,14 @@ import { PanlumComponent } from './components/panlum/panlum.component';
     SigninComponent,
     HomeComponent,
     ThreadComponent,
-    PostThreadComponent,
     TypeComponent,
     TopThreadComponent,
-    PanlumComponent
+    PanlumComponent,
+    ReadComponent,
+    CommentComponent,
+    ProfileComponent,
+    TopComponent,
+    MypostComponent
   ],
   imports: [
     BrowserModule,

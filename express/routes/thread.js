@@ -6,11 +6,17 @@ const mongoose = require('mongoose')
 var Schema = require('mongoose').Schema
 const userSchema = Schema({
     // id: String,
+    like: Number,
     title: String,
     textArea: String,
     filter: String,
     idUser: String,
-    time : { type : Date, default: Date.now }
+    profile: {
+        name: String,
+        age: Number,
+        avatar: String
+    },
+    time: { type: Date, default: Date.now }
 }, {
     collection: 'threads'
 })
@@ -43,7 +49,7 @@ const getThread = () => {
         Thread.find({}, (err, data) => {
             if (err) {
                 reject(new Error('Cannont get Thread'));
-            } else { 
+            } else {
                 if (data) {
                     resolve(data)
                 } else {
@@ -54,36 +60,51 @@ const getThread = () => {
     });
 }
 router.route('/thread')
-.get((req, res) => {
-    console.log('get');
-    getThread()
-        .then(result => {
-            console.log(result);
-            res.status(200).json(result);
-        })
-        .catch(err => {
-            console.log(err);
-        })
-});
+    .get((req, res) => {
+        console.log('get');
+        getThread()
+            .then(result => {
+                console.log(result);
+                res.status(200).json(result);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    });
 
 router.route('/thread')
     .post((req, res) => {
         console.log('add');
         addThread(req.body)
-        .then(result => {
-            console.log(result);
-            res.status(200).json(result);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+            .then(result => {
+                console.log(result);
+                res.status(200).json(result);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     })
 
-    router.route('/thread/:id')
-    .get( async (req, res) => {
+router.route('/thread/:id')
+    .get(async (req, res) => {
         const { id } = req.params
-        const threads = await Thread.find({_id: id})
+        const threads = await Thread.find({ _id: id })
         res.json(threads)
-      })
+    })
+
+router.route('/mythread/:id')
+    .get(async (req, res) => {
+        const { id } = req.params
+        const threads = await Thread.find({ idUser: id })
+        res.json(threads)
+    })
+
+    router.route('/delete/:id')
+    .delete(async (req, res) => {
+    const { id } = req.params
+
+    await Thread.findByIdAndDelete(id)
+    res.status(204).end()
+})
 
 module.exports = router

@@ -1,0 +1,38 @@
+
+<table class="table table-borderless">
+    <thead class="thead-inverse">
+        <tr>
+
+
+             <!-- <th>ชื่อกระทู้</th>  -->
+
+            <!-- <th>หมวดหมู่</th> -->
+
+
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr *ngFor="let item of comments ">
+           
+            <div class="row">
+            <div class="col-ms-3">
+                <img [src]="item.profile.avatar" style="height:90px;" width="90" >
+                <p><sub>#{{item.profile.name}}</sub></p>
+            </div>
+            
+            <div class="col-sm-4" >
+                <p  >{{item.text}}</p>
+            </div>
+          
+            <!-- <td>{{item.text}}</td> -->
+        </div>
+
+     <!-- <td>{{item.text}}</td> -->
+           <br>
+         
+        </tr>
+    
+    
+    </tbody>
+</table>

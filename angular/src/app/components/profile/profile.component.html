@@ -1,0 +1,59 @@
+
+<div class="container  " style="width:auto" >
+    <div style="background-color:#011238;" >
+    <h1 align="center " class="text-white" >Profile</h1>
+    
+    <div class="row" style="margin-top:30px" style="margin-left:60px" style="margin-right:60px">
+        
+        <div class="col-6">
+            <div class="float-left">
+                <div class="col-md">
+                        <img class="card-img-top" [src]="avatar"
+                        style="height:200px; width:200px" >
+                <div class="card-body">
+                    <h4 class="card-title text-white" >{{getName()}}</h4>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="card">
+                <div class="float-left">
+                <div class="card-body">
+                    <div class="row" >
+                    <p class="card-text">  
+                        <li>Name : {{getName()}}</li>
+                        <li>Age: {{age}}</li>
+                        <li>Email: {{email}}</li>
+                        
+                    </p>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+   
+
+    
+</div>
+
+
+<div class="row">
+    <div class="col-sm-2"></div>
+
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">กระทู้ของฉัน</div>
+            <div class="card-body">
+                <app-mypost></app-mypost>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<br><br><br><br><br><br>
+</div>
+</div>

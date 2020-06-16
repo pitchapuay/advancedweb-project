@@ -35,4 +35,20 @@ export class ThreadService {
       return this.threads;
     }));
   }
+
+  getMyThread(uid){
+    return this.http.get<any>('http://localhost:3000/thread/mythread/'+uid,)
+    .pipe(map(data =>{
+      if(data){
+        this.threads = data;
+        console.log(this.threads);
+      }
+      return this.threads;
+    }));
+  }
+
+  deleteThread(id){
+    return this.http.delete<any>('http://localhost:3000/thread/delete/'+id,)
+    
+  }
 }

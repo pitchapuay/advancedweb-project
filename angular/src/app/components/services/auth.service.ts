@@ -16,7 +16,12 @@ export class AuthService {
         if (data) {
           this.local.set('user', data, 1, 'w')
           this.local.set('id',data['result']['id'])
+          this.local.set('name',data['result']['name'])
+          this.local.set('age',data['result']['age'])
+          this.local.set('avatar',data['result']['avatar'])
+          this.local.set('email',data['result']['email'])
           console.log(this.local.get('user'))
+          console.log(this.local.get('age'))
          
         }
         return data

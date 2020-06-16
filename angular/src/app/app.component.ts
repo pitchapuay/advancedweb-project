@@ -1,5 +1,6 @@
 import { Component ,OnInit,DoCheck} from '@angular/core';
 import { LocalStorageService } from 'angular-web-storage'
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,7 +12,7 @@ export class AppComponent implements OnInit,DoCheck{
     
   }
   
-  constructor(private local:LocalStorageService){}
+  constructor(private local:LocalStorageService,private router:Router){}
   ngDoCheck(): void {
     if(this.local.get('id')!=null){
       this.status = true;
@@ -21,5 +22,10 @@ export class AppComponent implements OnInit,DoCheck{
   logout(){
     this.local.set('id',null)
     this.status = false;
+  }
+
+  toProfile(){
+    this.router.navigate(['/profile',this.local.get('id')]);
+    
   }
 }

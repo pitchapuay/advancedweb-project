@@ -19,20 +19,31 @@
             <div class="col-sm-2"></div>
             <div class="col-sm-8">
                 <div class="card">
-                   <h5> <div class="card-header">{{title}}</div></h5>
+                   <h5> <div class="card-header">{{title}} </div></h5>
                     <div class="card-body">
+                        <img [src]="avatar" style="height:30px;">
+                        <sub>  ผู้เขียน #{{name}}</sub>
+                        <br><br>
                         <p class="card-text">{{text}}</p>
+                       
+                        
+                       
+                        <br>
+                        <i (click)="like()" class="fa fa-thumbs-up" aria-hidden="true">ถูกใจ</i>
+                        
+                        
                             
                     </div>
                 </div>
             </div>
-
+           
         </div>
+        
 
 <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
         <br>
         <br>
-        <div class="row">
+        <div *ngIf="status" class="row">
             <div class="col-sm-2"></div>
 
             <div class="col-sm-8">
@@ -40,7 +51,7 @@
                     <div class="card-header">แสดงความคิดเห็น</div>
                     <div class="card-body">
                         <div >
-                            <!-- <form [formGroup]="commentForm">
+                             <form [formGroup]="commentForms" >
                                 
                                     
                                     <div class="col-md-2">
@@ -53,13 +64,31 @@
                                     </div>
                             
                          
-                           </form> -->
+                           </form> 
                            <div class="col-md-5">
                             
-                            <button type="button" class="btn btn-primary" >โพสต์</button>
+                            <button type="button" class="btn btn-primary" (click)="addComment()">โพสต์</button>
                            </div>
                             
                           </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-sm-2"></div>
+
+            <div class="col-sm-8">
+                <div class="card">
+                    <div class="card-header">การแสดงความคิดเห็น</div>
+                    <div class="card-body">
+                         <app-comment></app-comment> 
+                        
                     </div>
                 </div>
             </div>

@@ -49,7 +49,7 @@ const findUser = username => {
                 reject(new Error('Cannot find username!'));
             } else {
                 if (data) {
-                    resolve({ id: data._id, username: data.username, password: data.password })
+                    resolve({ id: data._id, username: data.username, password: data.password,name: data.name,age: data.age,avatar: data.avatar ,email:data.email})
                 } else {
                     reject(new Error('Cannot find username!'));
                 }
