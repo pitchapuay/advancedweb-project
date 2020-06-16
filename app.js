@@ -34,6 +34,7 @@ expressApp.use('/user',require('./express/routes/user'))
 expressApp.use('/signin', require('./express/routes/signin'))
 expressApp.use('/thread', require('./express/routes/thread'))
 expressApp.use('/comment', require('./express/routes/comment'))
+expressApp.use('/like', require('./express/routes/like'))
 
 expressApp.listen(3000, function(){
     console.log('Listening on port 3000')

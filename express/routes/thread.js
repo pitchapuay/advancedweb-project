@@ -107,4 +107,13 @@ router.route('/mythread/:id')
     res.status(204).end()
 })
 
+
+router.route('/count/:id').
+put( async (req, res) => {
+    const payload = req.body
+    const { id } = req.params
+  
+    const thread = await Thread.findByIdAndUpdate(id, { $set: payload })
+    res.json(thread)
+  })
 module.exports = router

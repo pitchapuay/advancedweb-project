@@ -29,8 +29,10 @@
                         
                        
                         <br>
-                        <i (click)="like()" class="fa fa-thumbs-up" aria-hidden="true">ถูกใจ</i>
-                        
+                    <div *ngIf="status">
+                        <i *ngIf="statusLike" (click)="like()" class="fa fa-thumbs-up " aria-hidden="true">ถูกใจ</i>
+                        <i *ngIf="statusLike==false" (click)="like()" class="fa fa-thumbs-up text-primary" aria-hidden="true">ถูกใจ</i>
+                    </div>  
                         
                             
                     </div>

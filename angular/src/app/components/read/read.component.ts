@@ -4,6 +4,7 @@ import { ThreadService } from 'src/app/serveices/thread.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { LocalStorageService } from 'angular-web-storage'
 import { CommentService } from 'src/app/serveices/comment.service';
+import { LikeService } from 'src/app/serveices/like.service';
 
 @Component({
   selector: 'app-read',
@@ -11,59 +12,113 @@ import { CommentService } from 'src/app/serveices/comment.service';
   styleUrls: ['./read.component.css']
 })
 export class ReadComponent implements OnInit {
-  threads:any
-  ids:string;
-  title:any
-  text:any
-  name:any
-  avatar:any
+  threads: any
+  ids: string;
+  title: any
+  text: any
+  name: any
+  avatar: any
+  likes: any
+  count: any
   status = false;
-  
+  statusLike = false;
+
 
   commentForms = new FormGroup({
-    text: new FormControl('', ),
-    
+    text: new FormControl('',),
+
     idThread: new FormControl(this.local.get('idThread'),),
     idUser: new FormControl(this.local.get('id'),),
     profile: new FormGroup({
       name: new FormControl(this.local.get('name'),),
       age: new FormControl(this.local.get('age'),),
       avatar: new FormControl(this.local.get('avatar'),),
-      
+
     }),
-    
+
   });
-  
-  
+
+  likeForms = new FormGroup({
+
+
+    idThread: new FormControl(this.local.get('idThread'),),
+    idUser: new FormControl(this.local.get('id'),),
+
+
+  });
+
+  countForms = new FormGroup({
+
+    like: new FormControl(this.local.get('count') + 1,),
+  });
+
+  countDelteForms = new FormGroup({
+
+    like: new FormControl(this.local.get('count') - 1,),
+  });
+
+
   constructor(private route: ActivatedRoute,
-    private th:ThreadService,
-    private local:LocalStorageService,
-    private cm:CommentService) { }
-   
+    private th: ThreadService,
+    private local: LocalStorageService,
+    private cm: CommentService,
+    private lk: LikeService) { }
+
   ngOnInit(): void {
-    if(this.local.get('id')!=null){
+
+    if (this.local.get('id') != null) {
       this.status = true;
     }
-    
+
     let id = this.route.snapshot.paramMap.get('id')
     this.ids = id;
-    
+
     this.onLoading();
+    this.onLikeCheck();
+
   }
-  onLoading(){
+  onLoading() {
     try {
       this.th.getReadThread(this.ids).subscribe(
-        data =>{
+        data => {
           this.threads = data
           this.title = data[0]['title']
           this.text = data[0]['textArea']
           this.avatar = data[0]['profile']['avatar']
           this.name = data[0]['profile']['name']
           
-          
-          
+          this.local.set('count', data[0]['like'])
+
+
+
         },
-        err =>{
+        err => {
+          console.log(err)
+        }
+      )
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+  onLikeCheck() {
+    try {
+      this.lk.getReadLike(this.ids, this.local.get('id')).subscribe(
+        data => {
+          this.likes = data
+          this.count = data[0]['_id']
+         // console.log(data[0]['_id'])
+         this.local.set('idLike', this.count)
+          if (data[0] == null) {
+            this.statusLike = true;
+          } else {
+            this.statusLike = false;
+
+          }
+
+        },
+        err => {
           console.log(err)
         }
       )
@@ -84,7 +139,70 @@ export class ReadComponent implements OnInit {
         console.log(err);
       });
   }
-  like(){
-    
+
+
+  addLike() {
+    this.lk.addLike(this.likeForms.value).subscribe(
+      data => {
+        console.log(data)
+        alert('like added successfully');
+        window.location.reload()
+        this.commentForms.reset();
+      },
+      err => {
+        console.log(err);
+      });
+  }
+  updateCount() {
+    this.th.updateCount(this.ids, this.countForms.value).subscribe(
+      data => {
+        console.log(data)
+        this.onLikeCheck();
+
+      },
+      err => {
+        console.log(err);
+      });
+  }
+
+  updateCountDelte() {
+    this.th.updateCount(this.ids, this.countDelteForms.value).subscribe(
+      data => {
+        console.log(data)
+        this.onLikeCheck();
+
+      },
+      err => {
+        console.log(err);
+      });
+  }
+
+
+  deleteLike(event) {
+    this.lk.deleteLike(event).subscribe(
+      data => {
+        console.log(data)
+        alert('delete added successfully');
+        this.onLoading();
+      },
+      err => {
+        console.log(err);
+      });
+  }
+
+  like() {
+    this.onLoading();
+    //alert( this.threads[0]['like']);
+    if (this.statusLike == true) {
+      this.addLike();
+      this.updateCount();
+    } else {
+      this.deleteLike(this.local.get('idLike'))
+      this.updateCountDelte();
+      this.statusLike = true;
+    }
+
+
+
   }
 }

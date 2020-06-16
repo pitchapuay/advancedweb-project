@@ -51,4 +51,9 @@ export class ThreadService {
     return this.http.delete<any>('http://localhost:3000/thread/delete/'+id,)
     
   }
+
+  updateCount(id,count){
+    return this.http.put<any>('http://localhost:3000/thread/count/'+id,count)
+    
+  }
 }
