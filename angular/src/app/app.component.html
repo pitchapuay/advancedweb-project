@@ -1,46 +1,44 @@
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-  </head>
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" 
-    
-    aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-    
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div *ngIf='status==false' class="row">
-        <a routerLink="home" class="navbar-brand btn btn-dark">Home</a>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item">
-              <a routerLink="signin" routerLinkActive="active" class="btn btn-dark">Sign In</a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="signup" routerLinkActive="active" class="btn btn-dark">Sign Up</a>
-            </li>
-          </ul>
-        </div>
+</head>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark static-top">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div *ngIf='status==false' class="row">
+    <a routerLink="home" class="navbar-brand btn btn-dark">Panlum</a>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a routerLink="signin" routerLinkActive="active" class="btn btn-dark">Sign In</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="signup" routerLinkActive="active" class="btn btn-dark">Sign Up</a>
+        </li>
+      </ul>
     </div>
-    <!-- 
+  </div>
+  <!-- 
         //////////////////
      -->
-     <div *ngIf='status'class="row">
-        <a routerLink="panlum" class="navbar-brand btn btn-dark">Panlum</a>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item">
-              <a routerLink="#" routerLinkActive="active" class="btn btn-dark" (click)="toProfile()">Proflie</a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="home" routerLinkActive="active" class="btn btn-dark" (click)='logout()'>Log Out</a>
-            </li>
-          </ul>
-        </div>
+  <div *ngIf='status' class="row">
+    <a routerLink="panlum" class="navbar-brand btn btn-dark">Panlum</a>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item">
+          <a routerLink="#" routerLinkActive="active" class="btn btn-dark" (click)="toProfile()">Proflie</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="home" routerLinkActive="active" class="btn btn-dark" (click)='logout()'>Log Out</a>
+        </li>
+      </ul>
     </div>
-    
-  </nav>
-  
-  <div class="container-fluid" style="margin-top:10px">
-    <router-outlet></router-outlet>
-    
   </div>
+
+</nav>
+
+<div class="container-fluid" style="margin-top:10px">
+  <router-outlet></router-outlet>
+
+</div>

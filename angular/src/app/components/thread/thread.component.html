@@ -1,41 +1,72 @@
-<div >
+<div>
     <form [formGroup]="threadForm">
-        
-            <div class="col-md-3">
-                ชื่อกระทู้
+
+        <div class="col-md-3">
+            ชื่อกระทู้
+        </div>
+        <div class="col-md-7">
+            <div class="form-group">
+                <input class="form-control" formControlName='title'>
             </div>
-            <div class="col-md-7">
-                <div class="form-group">
-                  <input  class="form-control" formControlName='title'>
+            <div class="form-group col-sm">
+                <div *ngIf="getFormControl('title').invalid && (getFormControl('title').dirty || getFormControl('title').touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="getFormControl('title').errors.required">
+                        *กรุณากรอกชื่อกระทู้
+                    </div>
+                    <div *ngIf="getFormControl('title').errors.minlength">
+                        *ชื่อกระทู้ควรมีความยาวมากกว่า 5 ตัวอักษร
+                    </div>
+                    <div *ngIf="getFormControl('title').errors.maxlength">
+                        *ชื่อกระทู้ควรมีความยาวน้อยกว่า 50 ตัวอักษร
+                    </div>
                 </div>
             </div>
-      
-            
-            <div class="col-md-2">
-                ข้อความ
+        </div>
+        <div class="col-md-2">
+            เนื้อหา
+        </div>
+        <div class="col-md-9">
+            <div class="form-group">
+                <textarea class="form-control" rows="8" id="comment" formControlName="textArea"></textarea>
             </div>
-            <div class="col-md-9">
-                <div class="form-group">
-                    <textarea  class="form-control" rows="8" id="comment" formControlName="textArea" ></textarea>
+            <div class="form-group col-sm">
+                <div *ngIf="getFormControl('textArea').invalid && (getFormControl('textArea').dirty || getFormControl('textArea').touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="getFormControl('textArea').errors.required">
+                        *กรุณากรอกเนื้อหา
+                    </div>
+                    <div *ngIf="getFormControl('textArea').errors.minlength">
+                        *เนื้อหาควรมีความยาวมากกว่า 5 ตัวอักษร
+                    </div>
+                    <div *ngIf="getFormControl('textArea').errors.maxlength">
+                        *เนื้อหาควรมีความยาวน้อยกว่า 1000 ตัวอักษร
+                    </div>
                 </div>
             </div>
-            <div class="col-md-2">
-                เลือกหมวดหมู่
+        </div>
+        <div class="col-md-2">
+            เลือกหมวดหมู่
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <select class="form-control" formControlName="filter">
+                    <option value=""></option>
+                    <option *ngFor="let item of threadType" [value]="item">{{item}}</option>
+                </select>
             </div>
-            <div class="col-md-5">
-                <div class="form-group">
-                    <select class="form-control" formControlName="filter">
-                      <option value=""></option>
-                      <option *ngFor="let item of threadType" [value]="item">{{item}}</option>
-                    </select>
-                  </div>
+            <div class="form-group col-sm">
+                <div *ngIf="getFormControl('filter').invalid && (getFormControl('filter').dirty || getFormControl('filter').touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="getFormControl('filter').errors.required">
+                        *กรุณาเลือกหมวดหมู่
+                    </div>
+                </div>
             </div>
-    
- 
-   </form>
-   <div class="col-md-5">
-    
-    <button type="button" class="btn btn-primary" (click)="addThread()">โพสต์</button>
-   </div>
-    
-  </div>
+        </div>
+    </form>
+    <div class="col-md-5">
+        <button type="button" [disabled]="!threadForm.valid" (click)="addThread()" class="btn btn-primary">โพสต์</button>
+    </div>
+
+</div>

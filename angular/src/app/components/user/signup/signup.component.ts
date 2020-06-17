@@ -10,37 +10,34 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class SignupComponent implements OnInit {
 
   profileForm = new FormGroup({
-    username: new FormControl('',[Validators.required]),
-    password: new FormControl('',[Validators.required]),
-    // confirmpassword: new FormControl('',[Validators.required]),
-    email: new FormControl('',[Validators.required, Validators.email]),
-    name: new FormControl('',[Validators.required]),
-    age: new FormControl('',[Validators.required]),
-    file: new FormControl('',[Validators.required]),
-    avatar: new FormControl('',[Validators.required])
+    username: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]),
+    password: new FormControl('', [Validators.required, Validators.pattern('(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z\d].{5,40}')]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    name: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]),
+    age: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(100)]),
+    file: new FormControl('', [Validators.required]),
+    avatar: new FormControl('', [Validators.required])
   });
 
   previewLoaded: boolean = false;
 
   get email() { return this.profileForm.get('email'); }
 
-  // get stdid() { return this.profileForm.get('stdid'); }
+  getFormControl(name) {
+    return this.profileForm.get(name);
+}
 
   constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
   }
 
-  checkForm(){
-    return this.email.invalid ? "INVALID" : "VALID" ;
-  }
-
-  signup(){
+  signup() {
     console.log(this.profileForm.value)
     this.auth.signUp(this.profileForm.value).subscribe(
       data => {
-          alert('Create your account successfully')
-          this.profileForm.reset()
+        alert('Create your account successfully')
+        this.profileForm.reset()
       },
       err => {
         console.log(err)

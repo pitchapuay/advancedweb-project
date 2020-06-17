@@ -4,17 +4,28 @@
             สมัครสมาชิก
         </div>
         <div class="card-body" style="margin: 0px 20px 0px 20px;">
-            <!-- <div class="row"> -->
-            <!-- <div class="col-md-7"> -->
 
-            <form [formGroup]="profileForm">
+            <form [formGroup]="profileForm" (ngSubmit)="signup()">
 
                 <div class="form-row align-items-center">
                     <div class="form-group col-sm-2">
                         <label>Username</label>
                     </div>
-                    <div class="form-group col-sm">
+                    <div class="form-group col-sm-6">
                         <input type="text" class="form-control" formControlName='username'>
+                    </div>
+                    <div class="form-group col-sm">
+                        <div *ngIf="getFormControl('username').invalid && (getFormControl('username').dirty || getFormControl('username').touched)" class="alertt">
+                            <div *ngIf="getFormControl('username').errors.required">
+                                *กรุณากรอก Username
+                            </div>
+                            <div *ngIf="getFormControl('username').errors.minlength">
+                                *Username ควรมีความยาวมากกว่า 5 ตัวอักษร
+                            </div>
+                            <div *ngIf="getFormControl('username').errors.maxlength">
+                                *Username ควรมีความยาวน้อยกว่า 30 ตัวอักษร
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -22,74 +33,107 @@
                     <div class="form-group col-sm-2">
                         <label>Password</label>
                     </div>
-                    <div class="form-group col-sm">
+                    <div class="form-group col-sm-6">
                         <input type="password" name="password" class="form-control" formControlName='password'>
                     </div>
+                    <div class="form-group col-sm">
+                        <div *ngIf="getFormControl('password').invalid && (getFormControl('password').dirty || getFormControl('password').touched)" class="alertt">
+                            <div *ngIf="getFormControl('password').errors.required">
+                                *กรุณากรอก Password
+                            </div>
+                            <div *ngIf="getFormControl('password').errors.pattern">
+                                *Password ควรมีความยาว 5-40 ตัวอักษร ประกอบด้วย A-Z/a-z และตัวเลข 
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <!-- <div class="form-row align-items-center">
-                            <div class="form-group col-sm-2">
-                                <label>Confirm Password</label>
-                            </div>
-                            <div class="form-group col-sm">
-                                <input type="password" name="confirmpassword" pattern={{password.value}} class="form-control" formControlName='confirmpassword'>
-                            </div>
-                            
-                            <div *ngIf="email.errors.pattern" class="alert alert-danger">
-                                    Password doesn't match!
-                            </div>
-                        </div> -->
 
                 <div class="form-row align-items-center">
                     <div class="form-group col-sm-2">
                         <label>Email</label>
                     </div>
-                    <div class="form-group col-sm">
+                    <div class="form-group col-sm-6">
                         <input type="email" class="form-control" formControlName='email'>
                     </div>
-                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
-                        <div *ngIf="email.errors.required">
-                            กรุณากรอก Email
-                        </div>
-                        <div *ngIf="email.errors.email">
-                            Email ไม่ถูกต้อง
+                    <div class="form-group col-sm">
+                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alertt">
+                            <div *ngIf="email.errors.required">
+                                *กรุณากรอก Email
+                            </div>
+                            <div *ngIf="email.errors.email">
+                                *Email ไม่ถูกต้อง
+                            </div>
                         </div>
                     </div>
                 </div>
                 <hr />
 
                 <h4>ข้อมูลส่วนตัว</h4>
+                <br />
 
                 <div class="form-row align-items-center">
                     <div class="form-group col-sm-2">
-                        <label>Full name</label>
+                        <label>ชื่อเต็ม</label>
                     </div>
-                    <div class="form-group col-sm">
+                    <div class="form-group col-sm-6">
                         <input type="text" class="form-control" formControlName='name'>
                     </div>
+                    <div class="form-group col-sm">
+                        <div *ngIf="getFormControl('name').invalid && (getFormControl('name').dirty || getFormControl('name').touched)" class="alertt">
+                            <div *ngIf="getFormControl('name').errors.required">
+                                *กรุณากรอกชื่อเต็ม
+                            </div>
+                            <div *ngIf="getFormControl('name').errors.minlength">
+                                *ชื่อเต็มควรมีความยาวมากกว่า 5 ตัวอักษร
+                            </div>
+                            <div *ngIf="getFormControl('name').errors.maxlength">
+                                *ชื่อเต็มควรมีความยาวน้อยกว่า 50 ตัวอักษร
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-row align-items-center">
                     <div class="form-group col-sm-2">
-                        <label>Age</label>
+                        <label>อายุ</label>
                     </div>
-                    <div class="form-group col-sm">
+                    <div class="form-group col-sm-6">
                         <input type="number" class="form-control" formControlName='age'>
                     </div>
+                    <div class="form-group col-sm">
+                        <div *ngIf="getFormControl('age').invalid && (getFormControl('age').dirty || getFormControl('age').touched)" class="alertt">
+                            <div *ngIf="getFormControl('age').errors.required">
+                                *กรุณากรอกอายุ
+                            </div>
+                            <div *ngIf="getFormControl('age').errors.min">
+                                *อายุควรมากกว่า 1 ปี
+                            </div>
+                            <div *ngIf="getFormControl('age').errors.max">
+                                *อายุควรน้อยกว่า 100 ปี
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-row align-items-center">
                     <div class="form-group col-sm-2">
-                        <label>Profile picture</label>
+                        <label>รูปประจำตัว</label>
                     </div>
                     <div class="form-group col-sm">
                         <input type="file" class="form-control-file" formControlName='file'
                             (change)="onChangeImg($event)">
                     </div>
+                    <div class="form-group col-sm">
+                        <div *ngIf="getFormControl('file').invalid && (getFormControl('file').dirty || getFormControl('file').touched)" class="alertt">
+                            <div *ngIf="getFormControl('file').errors.required">
+                                *กรุณาเลือกรูปประจำตัว
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-sm-2">
 
                     </div>
                     <div class="col-md-9">
@@ -98,30 +142,10 @@
                     </div>
                 </div>
 
-                
-
-                <br /><br />
-                <button type="button" (click)="signup()" class="btn btn-primary">Submit</button>&nbsp;
-                <button type="reset" class="btn btn-danger" (click)="resetForm()">Reset</button>
+                <br />
+                <button  type="submit" [disabled]="!profileForm.valid" class="btn btn-success">สมัครสมาชิก</button>&nbsp;
+                <button type="reset" class="btn btn-danger" (click)="resetForm()">ล้างข้อมูล</button>
             </form>
-
-            <!-- </div> -->
-
-            <!-- <div class="col-md-5">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Display :</h4>
-                            <p class="card-text">
-                                Form Value: {{profileForm.value|json}}
-                            </p>
-                            <p>
-                                Form Status : {{checkForm()}}
-                            </p>
-                        </div>
-                    </div>
-                </div> -->
-
-            <!-- </div> -->
         </div>
     </div>
 </div>

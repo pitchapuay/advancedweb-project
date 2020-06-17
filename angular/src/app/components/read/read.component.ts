@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ThreadService } from 'src/app/serveices/thread.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LocalStorageService } from 'angular-web-storage'
 import { CommentService } from 'src/app/serveices/comment.service';
 import { LikeService } from 'src/app/serveices/like.service';
@@ -23,39 +23,33 @@ export class ReadComponent implements OnInit {
   status = false;
   statusLike = false;
 
-
   commentForms = new FormGroup({
-    text: new FormControl('',),
-
-    idThread: new FormControl(this.local.get('idThread'),),
-    idUser: new FormControl(this.local.get('id'),),
+    text: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]),
+    idThread: new FormControl(this.local.get('idThread')),
+    idUser: new FormControl(this.local.get('id')),
     profile: new FormGroup({
-      name: new FormControl(this.local.get('name'),),
-      age: new FormControl(this.local.get('age'),),
-      avatar: new FormControl(this.local.get('avatar'),),
-
+      name: new FormControl(this.local.get('name')),
+      age: new FormControl(this.local.get('age')),
+      avatar: new FormControl(this.local.get('avatar')),
     }),
-
   });
 
   likeForms = new FormGroup({
-
-
-    idThread: new FormControl(this.local.get('idThread'),),
-    idUser: new FormControl(this.local.get('id'),),
-
-
+    idThread: new FormControl(this.local.get('idThread')),
+    idUser: new FormControl(this.local.get('id')),
   });
 
   countForms = new FormGroup({
-
     like: new FormControl(this.local.get('count') + 1,),
   });
 
   countDelteForms = new FormGroup({
-
     like: new FormControl(this.local.get('count') - 1,),
   });
+
+  getFormControl(name) {
+    return this.commentForms.get(name);
+  }
 
 
   constructor(private route: ActivatedRoute,
@@ -87,11 +81,6 @@ export class ReadComponent implements OnInit {
           this.text = data[0]['textArea']
           this.avatar = data[0]['profile']['avatar']
           this.name = data[0]['profile']['name']
-
-          
-
-
-
         },
         err => {
           console.log(err)
@@ -108,14 +97,11 @@ export class ReadComponent implements OnInit {
       this.lk.getReadLike(this.ids, this.local.get('id')).subscribe(
         data => {
           this.likes = data
-
           if (data[0] == null) {
             this.statusLike = true;
           } else {
             this.statusLike = false;
-
           }
-
         },
         err => {
           console.log(err)
@@ -137,9 +123,7 @@ export class ReadComponent implements OnInit {
             this.statusLike = true;
           } else {
             this.statusLike = false;
-
           }
-
         },
         err => {
           console.log(err)
@@ -181,7 +165,6 @@ export class ReadComponent implements OnInit {
       data => {
         console.log(data)
         this.onLikeCheck();
-
       },
       err => {
         console.log(err);
@@ -193,7 +176,6 @@ export class ReadComponent implements OnInit {
       data => {
         console.log(data)
         // this.onLikeCheck();
-
       },
       err => {
         console.log(err);
@@ -214,22 +196,18 @@ export class ReadComponent implements OnInit {
   }
 
   like() {
-
     //alert( this.threads[0]['like']);
-    
-      this.onLoading();
-      this.onLikeCheck();
-      this.addLike();
-      this.updateCount();
- }
-  unlike(){
     this.onLoading();
-      this.onLikeCheckDelte();
-
-
-      this.deleteLike(this.local.get('idLike'))
-      this.updateCountDelte();
-      this.statusLike = true;
-      this.onLoading();
+    this.onLikeCheck();
+    this.addLike();
+    this.updateCount();
+  }
+  unlike() {
+    this.onLoading();
+    this.onLikeCheckDelte();
+    this.deleteLike(this.local.get('idLike'))
+    this.updateCountDelte();
+    this.statusLike = true;
+    this.onLoading();
   }
 }
