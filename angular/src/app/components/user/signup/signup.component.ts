@@ -11,7 +11,7 @@ export class SignupComponent implements OnInit {
 
   profileForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]),
-    password: new FormControl('', [Validators.required, Validators.pattern('(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z\d].{5,40}')]),
+    password: new FormControl('', [Validators.required, Validators.pattern('(?=.*[A-Za-z])(?=.*[0-9]).{5,40}')]),
     email: new FormControl('', [Validators.required, Validators.email]),
     name: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]),
     age: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(100)]),
