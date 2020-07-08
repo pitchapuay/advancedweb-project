@@ -5706,9 +5706,9 @@ npm-pick-manifest@^3.0.0:
     semver "^5.4.1"
 
 npm-registry-fetch@^4.0.0:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/npm-registry-fetch/-/npm-registry-fetch-4.0.4.tgz#2da1ecf3f43d419d96abf313664291a4623d3ea5"
-  integrity sha512-6jb34hX/iYNQebqWUHtU8YF6Cjb1H6ouTFPClYsyiW6lpFkljTpdeftm53rRojtja1rKAvKNIIiTS5Sjpw4wsA==
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/npm-registry-fetch/-/npm-registry-fetch-4.0.5.tgz#cb87cf7f25bfb048d6c3ee19d115bebf93ea5bfa"
+  integrity sha512-yQ0/U4fYpCCqmueB2g8sc+89ckQ3eXpmU4+Yi2j5o/r0WkKvE2+Y0tK3DEILAtn2UaQTkjTHxIXe2/CSdit+/Q==
   dependencies:
     JSONStream "^1.3.4"
     bluebird "^3.5.1"
@@ -7516,11 +7516,6 @@ socks@~2.3.2:
   dependencies:
     ip "1.1.5"
     smart-buffer "^4.1.0"
-
-sort-by-typescript@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/sort-by-typescript/-/sort-by-typescript-1.0.2.tgz#012d193aebb3a0168402316e7d619b78749430da"
-  integrity sha512-LwYGcgQnvvjRTzgqpAg4Y60NBDjJAGfIZtkQ7acIFEHNeQxMHV9LSa8edOUx4rtuD68if8ObeHZYT5XuGasddA==
 
 sort-keys@^1.0.0:
   version "1.1.2"
